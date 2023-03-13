@@ -19,6 +19,7 @@ import SubVariation from "./SubVariation"
 export default function Mainline({ mainline, sub }) {
 	let otherRender = []
 	for (let key of mainline) {
+		console.log("test")
 		console.log(key)
 		if (key.type === "mainline") {
 			if (key.start_move) {

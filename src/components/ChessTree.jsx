@@ -31,22 +31,29 @@ export default function ChessTree({ data }) {
 			type: "mainline",
 			moves: ["e4", "d5"],
 			start_move: 1,
+			parent: 0,
 		},
 		{
 			type: "variation",
-			moves: ["e4", "c6", "d4", "d5", "d8"],
-			colour: "white",
+			moves: ["c6", "d4", "d5", "f3"],
+			colour: "black",
 			start_move: 1,
 		},
 		{
 			type: "variation",
-			moves: ["c6", "d4", "d5", "b5", "c5"],
+			moves: ["b5", "b3"],
 			colour: "black",
-			start_move: 3,
+			start_move: 1,
 		},
 		{
 			type: "mainlineCont",
-			moves: ["d4", "dxe4", "e5", "e3"],
+			moves: ["d4", "dxe4", "d5", "e6"],
+			start_move: 2,
+		},
+		{
+			type: "variation",
+			moves: ["d3", "d4", "e5"],
+			colour: "white",
 			start_move: 2,
 		},
 	]
@@ -56,3 +63,5 @@ export default function ChessTree({ data }) {
 		</div>
 	)
 }
+
+//1. e4 d5 (1... c6 2. d4 d5 3. f3) (1... b5 2. b3) 2. d4 (2. d3 d4 3. e5) 2... dxe4 3. d5 e6
