@@ -50,7 +50,7 @@ export default function Mainline({ mainline, sub }) {
 				}
 				otherRender.push(<div className="Line"> {key.moves[i]}</div>)
 			}
-			if (key.moves.length % 2 === 1) {
+			if (!key.final && key.moves.length % 2 === 1) {
 				otherRender.push(<div className="Line">...</div>)
 			}
 		}

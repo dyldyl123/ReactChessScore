@@ -43,11 +43,12 @@ export default function ChessTree({ data }) {
 				moves: ["b5", "b3"],
 				colour: "black",
 				start_move: 1,
-				children: [],
+				children: [{ type: "variation", moves: ["blah", "blah"], colour: "black", start_move: 3, children: [] }],
 			},
 		],
 		{
 			type: "mainlineCont",
+			final: false,
 			colour: "white",
 			moves: ["d4"],
 			start_move: 2,
@@ -63,6 +64,7 @@ export default function ChessTree({ data }) {
 		],
 		{
 			type: "mainlineCont",
+			final: true,
 			colour: "black",
 			moves: ["dxe4", "d5", "e6"],
 			start_move: 2,
