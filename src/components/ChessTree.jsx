@@ -20,8 +20,6 @@ export default function ChessTree({ data }) {
 		subVariationCurrent = data[subVariationCurrent.children[0]]
 	}
 	subVariation.push(subVariationCurrent.name)
-	console.log("subvarcurr")
-	console.log(subVariation)
 
 	mainLine = ["e4", "d5", "c4"]
 	subVariation = ["e4", "c6", "d4"] // ["...", "c6", "d4"]
@@ -31,20 +29,27 @@ export default function ChessTree({ data }) {
 			type: "mainline",
 			moves: ["e4", "d5"],
 			start_move: 1,
-			parent: 0,
 		},
 		{
 			type: "variation",
-			moves: ["c6", "d4", "d5", "f3"],
-			colour: "black",
-			start_move: 1,
+			children: [
+				{
+					type: "variation",
+					moves: ["c6", "d4", "d5", "f3"],
+					colour: "black",
+					start_move: 1,
+					children: [],
+				},
+				{
+					type: "variation",
+					moves: ["b5", "b3"],
+					colour: "black",
+					start_move: 1,
+					children: [],
+				},
+			],
 		},
-		{
-			type: "variation",
-			moves: ["b5", "b3"],
-			colour: "black",
-			start_move: 1,
-		},
+
 		{
 			type: "mainlineCont",
 			moves: ["d4", "dxe4", "d5", "e6"],
@@ -55,6 +60,7 @@ export default function ChessTree({ data }) {
 			moves: ["d3", "d4", "e5"],
 			colour: "white",
 			start_move: 2,
+			children: [],
 		},
 	]
 	return (

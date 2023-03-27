@@ -19,8 +19,6 @@ import SubVariation from "./SubVariation"
 export default function Mainline({ mainline, sub }) {
 	let otherRender = []
 	for (let key of mainline) {
-		console.log("test")
-		console.log(key)
 		if (key.type === "mainline") {
 			if (key.start_move) {
 				otherRender.push(<MoveNumber variation="false" number={key.start_move} />)
@@ -34,7 +32,7 @@ export default function Mainline({ mainline, sub }) {
 			}
 		}
 		if (key.type === "variation") {
-			otherRender.push(<SubVariation line={key.moves} colour={key.colour} start_move={key.start_move} />)
+			otherRender.push(<SubVariation line={key.moves} colour={key.colour} start_move={key.start_move} children={key.children} />)
 		}
 		if (key.type === "mainlineCont") {
 			if (key.start_move) {
@@ -48,6 +46,7 @@ export default function Mainline({ mainline, sub }) {
 			}
 		}
 	}
+	console.log("other render")
 	console.log(otherRender)
 	// const renderedMainLine = mainline.map((move) => {
 	//   return <div className="Line"> {move} </div>;

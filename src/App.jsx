@@ -38,7 +38,6 @@ const treeData = flattenTree({
 	children: treeify(data[0].moves),
 })
 
-console.log(treeData)
 export default function App() {
 	return (
 		<div>
