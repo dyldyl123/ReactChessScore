@@ -1,8 +1,8 @@
-export default function SubVariation({ line, colour, start_move, children }) {
-	console.log("subvar")
-	console.log(children)
-	let renderedSubVariation = []
+import SubVariationLine from "./SubVariationLine"
+
+export default function SubVariation({ data, line, colour, start_move, children }) {
 	function prepareArray(line, colour, start_move) {
+		let renderedSubVariation = []
 		for (let i = 0; i < line.length; i++) {
 			if (colour === "black") {
 				if (i === 0) {
@@ -29,22 +29,15 @@ export default function SubVariation({ line, colour, start_move, children }) {
 				}
 			}
 		}
+		return renderedSubVariation
+	}
+	let lines = []
+
+	for (let variationIndex = 0; variationIndex < data.length; variationIndex++) {
+		lines.push(prepareArray(data[variationIndex].moves, data[variationIndex].colour, data[variationIndex].start_move))
 	}
 
-	if (children.length === 0) {
-		prepareArray(line, colour, start_move)
-	} else {
-		for (let i = 0; i < children.length; i++) {
-			prepareArray(children[i].line, children[i].colour, children[i].start)
-		}
-	}
+	let newLines = lines.map((line) => <SubVariationLine data={line} />)
 
-	console.log("rendered")
-	console.log(renderedSubVariation)
-
-	return (
-		<div className="interrupt">
-			<div className="interrupt-lines">{renderedSubVariation}</div>
-		</div>
-	)
+	return <div className="interrupt">{newLines}</div>
 }

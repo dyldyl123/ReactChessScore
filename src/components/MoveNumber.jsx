@@ -1,4 +1,4 @@
-export default function MoveNumber({ variation, number }) {
+export default function MoveNumber({ colour, variation, number }) {
 	if (variation === "false") {
 		return <div className="Index">{number}</div>
 	} else {

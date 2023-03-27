@@ -30,37 +30,42 @@ export default function ChessTree({ data }) {
 			moves: ["e4", "d5"],
 			start_move: 1,
 		},
-		{
-			type: "variation",
-			children: [
-				{
-					type: "variation",
-					moves: ["c6", "d4", "d5", "f3"],
-					colour: "black",
-					start_move: 1,
-					children: [],
-				},
-				{
-					type: "variation",
-					moves: ["b5", "b3"],
-					colour: "black",
-					start_move: 1,
-					children: [],
-				},
-			],
-		},
-
+		[
+			{
+				type: "variation",
+				moves: ["c6", "d4", "d5", "f3"],
+				colour: "black",
+				start_move: 1,
+				children: [],
+			},
+			{
+				type: "variation",
+				moves: ["b5", "b3"],
+				colour: "black",
+				start_move: 1,
+				children: [],
+			},
+		],
 		{
 			type: "mainlineCont",
-			moves: ["d4", "dxe4", "d5", "e6"],
+			colour: "white",
+			moves: ["d4"],
 			start_move: 2,
 		},
+		[
+			{
+				type: "variation",
+				moves: ["d3", "d4", "e5"],
+				colour: "white",
+				start_move: 2,
+				children: [],
+			},
+		],
 		{
-			type: "variation",
-			moves: ["d3", "d4", "e5"],
-			colour: "white",
+			type: "mainlineCont",
+			colour: "black",
+			moves: ["dxe4", "d5", "e6"],
 			start_move: 2,
-			children: [],
 		},
 	]
 	return (
