@@ -40,10 +40,19 @@ export default function ChessTree({ data }) {
 			},
 			{
 				type: "variation",
-				moves: ["b5", "b3"],
+				moves: ["b5", "b3", "b5", "b6"],
 				colour: "black",
 				start_move: 1,
-				children: [{ type: "variation", moves: ["blah", "blah"], colour: "black", start_move: 3, children: [] }],
+				children: [
+					{ type: "variation", moves: ["blah1", "blah1"], colour: "black", start_move: 3, children: [] },
+					{
+						type: "variation",
+						moves: ["blah2", "blah2"],
+						colour: "black",
+						start_move: 2,
+						children: [{ type: "variation", moves: ["blah2child", "blah2child"], colour: "black", start_move: 3, children: [] }],
+					},
+				],
 			},
 		],
 		{
