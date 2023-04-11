@@ -40,7 +40,7 @@ export default function ChessTree({ data }) {
 			},
 			{
 				type: "variation",
-				moves: ["b5", "b3", "b5", "b6"],
+				moves: ["b5", "b3", "b5", "b6", "b7", "b8"],
 				colour: "black",
 				start_move: 1,
 				children: [

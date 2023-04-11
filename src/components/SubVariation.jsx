@@ -7,7 +7,7 @@ import dfs from "../utils/dfs"
 export default function SubVariation({ data }) {
 	// console.log("data coming in")
 	// console.log(data)
-	function prepareArray(line, colour, start_move) {
+	function prepareArray(line, colour, start_move, type) {
 		let renderedSubVariation = []
 		for (let i = 0; i < line?.length; i++) {
 			if (colour === "black") {
@@ -35,29 +35,58 @@ export default function SubVariation({ data }) {
 				}
 			}
 		}
-		return renderedSubVariation
+		return [renderedSubVariation, type]
 	}
 	let lines = []
 
 	for (let variationIndex = 0; variationIndex < data?.length; variationIndex++) {
-		lines.push(prepareArray(data[variationIndex].moves, data[variationIndex].colour, data[variationIndex].start_move))
+		lines.push(prepareArray(data[variationIndex].moves, data[variationIndex].colour, data[variationIndex].start_move, "SubVariationLine"))
 		// console.log(data[variationIndex].moves)
 		// if variation has children
 		if (data[variationIndex].children?.length > 0) {
-			let temp = dfs(data[variationIndex], "bob")
-			console.log("temp")
-			console.log(temp)
-			// console.log(`${data[variationIndex].moves} has children`)
-			// console.log(`loop through its ${data[variationIndex].children?.length} children`)
-			for (let i = 0; i < data[variationIndex]?.children?.length; i++) {
-				let currentChild = data[variationIndex]?.children[i]
-				// console.log(currentChild.moves)
-				lines.push(prepareArray(currentChild.moves, currentChild.colour, currentChild.start_move))
+			// counts tells us the number of children of this variation that start at a given move number
+			// if that move number count >=2 it should be a seperate line
+			let childrenCount = data[variationIndex].children?.length
+
+			if (childrenCount > 1) {
+				// handle SubVariationLIne
+				for (let i = 0; i < data[variationIndex]?.children?.length; i++) {
+					let currentChild = data[variationIndex]?.children[i]
+					lines.push(prepareArray(currentChild.moves, currentChild.colour, currentChild.start_move, "SubVarationLineAtHigherDepth"))
+				}
+			} else {
+				for (let i = 0; i < data[variationIndex]?.children?.length; i++) {
+					let currentChild = data[variationIndex]?.children[i]
+					currentChild.moves[0] = "(" + currentChild.moves[0]
+					console.log("test")
+					currentChild.moves[currentChild.length - 1] = currentChild.moves[currentChild.length - 1] + ")"
+					console.log(currentChild.moves)
+					let sm = data[variationIndex]?.start_move
+					let childsm = currentChild.start_move
+					let childcolour = currentChild.colour
+					let colour = data[variationIndex].colour
+					let diff = childsm - sm
+					lines.push(prepareArray(currentChild.moves, currentChild.colour, currentChild.start_move, "SubVariationLineWithBrackets"))
+				}
 			}
+			let counts = dfs(data[variationIndex], "bob")
+			console.log("counts")
+			console.log(counts)
+		} else {
+			lines.push(prepareArray(data[variationIndex].moves, data[variationIndex].colour, data[variationIndex].start_move, "SubVariationLine"))
 		}
 	}
 
-	let newLines = lines.map((line) => <SubVariationLine data={line} />)
+	let newLines = lines.map((line) => {
+		if (line[1] === "SubVariationLine") {
+			return <SubVariationLine data={line[0]} />
+		} else if (line[1] === "SubVariationLineWithBrackets") {
+			return <SubVariationLineWithBrackets data={line[0]} />
+		} else if (line[1] === "SubVarationLineAtHigherDepth") {
+			return <SubVariationLineWithBrackets data={line[0]} />
+		} else {
+		}
+	})
 	// console.log("newlines")
 	// console.log(newLines)
 	return <div className="interrupt">{newLines}</div>
